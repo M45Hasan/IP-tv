@@ -1,0 +1,49 @@
+/* Slider arrows */
+
+.elegent-custom-arrow {
+  position: absolute;
+  bottom: 0;
+  width: 50px; /* Adjust the width and height as needed */
+  height: 50px;
+  background-color: white;
+  color: #fcca0b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 99999;
+}
+
+.elegent-custom-arrow.next {
+  right: 0;
+}
+
+.elegent-custom-arrow.prev {
+  right: 50px;
+  margin-left: 100px;
+  z-index: 999;
+}
+
+/* YourCustomArrowStyles.css */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  transition: background-color 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}

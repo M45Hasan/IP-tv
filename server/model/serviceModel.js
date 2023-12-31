@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const serviceSchema = new Schema(
   {
     category: { type: Schema.Types.ObjectId, ref: "Category" },
+    purchaseList: [{ type: Schema.Types.ObjectId, ref: "Order" }],
     serviceName: { type: String, require },
     detail: { type: String },
     information: { type: String },
@@ -14,7 +15,7 @@ const serviceSchema = new Schema(
     demo: { type: Boolean, default: true },
     reseller: { type: Boolean, default: true },
     resellerInfo: {
-      serviceInfo: String,
+      type: String,
     },
     restream: { type: Boolean, default: true },
     restreamInfo: {
@@ -38,11 +39,47 @@ const serviceSchema = new Schema(
       },
       regularPrice: Number,
     },
-    saleCount: { type: Number },
+    saleCount: { type: Number, default: 0 },
+    isHide: { type: Boolean, default: false },
   },
   {
     timestamps: true,
+    strict: true,
   }
 );
 
 module.exports = mongoose.model("Service", serviceSchema);
+
+// serviceName:
+// detail: ,
+// information: ,
+// live: ,
+// movie: ,
+// series: ,
+// url: ,
+
+// resellerInfo: {
+//   serviceInfo:
+// },
+
+// restreamInfo: {
+//   wwConnection:
+//   serviceInfo:
+// },
+
+// price: {
+//   subcriptionPrice: {  { 3,6,12 , 5,10,50,100}
+//     threeMonths:
+//     sixMonths:
+//     twelevMonths:
+//   },
+//   resellerPriceMonthly: {
+//     fiveCredits: ,
+//     tenCredits:,
+//   },
+//   restreamPriceMonthly: {
+//     fiftyK:
+//     hundedK:
+//   },
+//   regularPrice:
+// },

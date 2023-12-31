@@ -1,0 +1,7 @@
+.carousel .thumbs {
+  text-align: center !important;
+}
+.carousel .control-next.control-arrow {
+  right: 0;
+  display: none !important;
+}

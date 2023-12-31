@@ -4,21 +4,22 @@ const { Schema } = mongoose;
 const newSchema = new Schema(
   {
     customer: { type: Schema.Types.ObjectId, ref: "Customer" },
-    serviceId: String,
-    trnasId: String,
+    serviceId: { type: Schema.Types.ObjectId, ref: "Service" },
+    sId: String,
+    tId: String,
     price: Number,
-   
+    serviceName: String,
+    serviceInfo: Number,
     isSuccess: { type: Boolean, default: false },
-    service: [
-      {
-        type: Object,
-      },
-    ],
-    customerInfo: [
-      {
-        type: Object,
-      },
-    ],
+    serviceStart: Date,
+    serviceEnd: Date,
+    service: {
+      type: Object,
+    },
+
+    customerInfo: {
+      type: Object,
+    },
   },
   { timestamps: true }
 );

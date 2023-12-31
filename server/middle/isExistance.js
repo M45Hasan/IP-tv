@@ -1,6 +1,6 @@
 const { tryCatch } = require("../utils/tryCatch");
 const appStatus = require("../utils/appStatus");
-const User = require("../model/userModal");
+
 const verifymail = require("../utils/mailing");
 const {
   NotFoundError,

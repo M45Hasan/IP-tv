@@ -10,11 +10,12 @@ const categorySchema = new Schema(
   },
   {
     timestamps: true,
+    // strict: false,
   }
 );
 
-categorySchema.virtual(" serviceView", {
-  ref: "service",
+categorySchema.virtual("serviceView", {
+  ref: "Service",
   localField: "serviceList",
   foreignField: "_id",
 });

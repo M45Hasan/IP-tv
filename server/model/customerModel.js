@@ -10,7 +10,7 @@ const newSchema = new Schema(
     mobile: { type: String },
     addres: { type: String },
     otp: Number,
-    orderList: { type: Schema.Types.ObjectId, ref: "Order", virtual: true },
+    orderList: [{ type: Schema.Types.ObjectId, ref: "Order", virtual: true }],
     purchaseService: {
       type: Schema.Types.ObjectId,
       ref: "Service",
@@ -21,12 +21,12 @@ const newSchema = new Schema(
     timestamps: true,
   }
 );
-newSchema.virtual(" orderView", {
+newSchema.virtual("orderView", {
   ref: "Order",
   localField: "orderList",
   foreignField: "_id",
 });
-newSchema.virtual(" myService", {
+newSchema.virtual("myService", {
   ref: "Service",
   localField: "purchaseService",
   foreignField: "_id",

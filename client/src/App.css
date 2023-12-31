@@ -1,0 +1,291 @@
+/* -----Scrolling css start */
+.scroll-to-top {
+  background-color: white;
+  right: 38px !important;
+  bottom: 40px;
+  position: fixed;
+  z-index: 999 !important;
+  cursor: pointer;
+  border-radius: 7px;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 9px 25px 0 rgba(132, 128, 177, 0.28);
+  border: none;
+}
+/* -----Scrolling css  end*/
+
+/* #Mega Menu Styles
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.mega-menu {
+  display: none;
+  /* left: 0;
+  position: absolute;
+  text-align: left;
+  width: 100%; */
+}
+
+/* #hoverable Class Styles
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.hoverable {
+  position: static;
+  transition: all 0.5s;
+}
+
+/* .hoverable > a:after {
+  content: "\25BC";
+  font-size: 10px;
+  padding-left: 6px;
+  position: relative;
+  top: -1px;
+
+  transition: 0.5s;
+} */
+
+.hoverable:hover .mega-menu {
+  display: block;
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* transition: 0.03s; */
+}
+
+/* #toggle Class Styles
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.toggleable > label:after {
+  content: "\25BC";
+  font-size: 10px;
+  padding-left: 6px;
+  position: relative;
+  top: -1px;
+}
+
+.toggle-input {
+  display: none;
+}
+.toggle-input:not(checked) ~ .mega-menu {
+  display: none;
+}
+
+.toggle-input:checked ~ .mega-menu {
+  display: block;
+}
+
+.toggle-input:checked + label {
+  color: white;
+  background: #2c5282; /*@apply bg-blue-800 */
+}
+
+.toggle-input:checked ~ label:after {
+  content: "\25B2";
+  font-size: 10px;
+  padding-left: 6px;
+  position: relative;
+  top: -1px;
+}
+
+/*  */
+/* .dropdown {
+
+  cursor: pointer;
+  height: 80px;
+  line-height: 50px;
+  position: relative;
+  width: 120px;
+  text-align: center;
+  text-decoration: none;
+  z-index: 1;
+  transform: perspective(1000px);
+
+} */
+
+/* .dropdown-menu {
+  background-color: #fff;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  text-align: center;
+  top: 0px;
+  visibility: hidden;
+  z-index: -99999;
+} */
+
+/* .dropdown-menu li:first-child {
+  cursor: default;
+} */
+
+/* .dropdown-menu a {
+  color: #000;
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+} */
+
+/* .dropdown-menu a:hover {
+
+  
+} */
+
+/* .dropdown:hover .dropdown-menu {
+  background: aliceblue;
+  opacity: 1;
+  visibility: visible;
+  top: 100%;
+  width: 100%;
+  -webkit-transition: all 0.5s, background, 2s 0.5s linear;
+  transition: all 0.5s, background 2s 0.5s linear;
+} */
+
+/* desktop hamburger */
+.nav-elements-burger {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background-color: White;
+  transition: all 0.3s ease-in;
+  width: 0px;
+  height: calc(100vh - 60px);
+  transition-duration: 700ms;
+  overflow: hidden;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.nav-elements-burger.active {
+  width: 500px;
+  transition-duration: 700ms;
+}
+/* desktop hamburger */
+/* desktop hamburger close button css starrt */
+.outer {
+  position: relative;
+  margin: auto;
+  width: 40px;
+  margin-top: 50px;
+  margin-right: 0px;
+  cursor: pointer;
+}
+
+.inner {
+  width: inherit;
+  text-align: center;
+}
+
+label {
+  font-size: 0.8em;
+  line-height: 4em;
+  text-transform: uppercase;
+  color: #000;
+  font-weight: 900;
+  transition: all 0.3s ease-in;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.inner:before,
+.inner:after {
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: inherit;
+  background: #000;
+  left: 0;
+  transition: all 0.3s ease-in;
+}
+
+.inner:before {
+  top: 50%;
+  transform: rotate(45deg);
+}
+
+.inner:after {
+  bottom: 50%;
+  transform: rotate(-45deg);
+}
+
+.outer:hover label {
+  opacity: 1;
+}
+
+.outer:hover .inner:before,
+.outer:hover .inner:after {
+  transform: rotate(0);
+}
+
+.outer:hover .inner:before {
+  top: 0;
+}
+
+.outer:hover .inner:after {
+  bottom: 0;
+}
+/* desktop hamburger close button end */
+/* blur full screen */
+
+.main-content {
+  transition: filter 0.3s ease; /* Apply smooth blur transition */
+}
+
+.main-content.blur {
+  filter: blur(5px); /* Apply blur effect when sidebar is open */
+}
+
+/* blur full screen end */
+
+/* Elegent part css start */
+
+/* underline css start */
+
+.link-underline {
+  border-bottom-width: 0;
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(#fff, #fff);
+  background-size: 0 3px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s ease-in-out;
+}
+
+.link-underline-black {
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(#000, #000);
+}
+
+.link-underline:hover {
+  background-size: 100% 3px;
+  background-position: 0 100%;
+}
+
+/* Elegent part css start */
+/*Elegent slider css */
+.carousel-caption-top {
+  text-align: start !important;
+  font-size: 10px !important;
+  left: 10px !important;
+  color: #000 !important;
+}
+
+@media only screen and (max-width: 500px) {
+  .carousel-container {
+    height: 700px !important  ;
+  }
+}
+.carousel .slide img {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/*Elegent slider css */
+/* inspired */
+.rec.rec-arrow:disabled {
+  visibility: hidden;
+}
+/* slcik css */
+.react-multiple-carousel__arrow::before {
+  color: #000 !important;
+}
+/* slcik css  */

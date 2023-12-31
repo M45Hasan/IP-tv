@@ -1,0 +1,26 @@
+/* Slider arrows */
+
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px; /* Adjust the width and height as needed */
+  height: 50px;
+  background-color: white;
+  color: #fcca0b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.custom-arrow.next {
+  right: 0;
+}
+
+.custom-arrow.prev {
+  right: 50px;
+  margin-left: 100px;
+  z-index: 9;
+}

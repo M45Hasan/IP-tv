@@ -18,7 +18,7 @@ async function sendOrderConfirmationEmail(user, order) {
 
   // Render the EJS email template
   const emailTemplate = await ejs.renderFile(
-    path.join(__dirname, "../views/result.ejs"),
+    path.join(__dirname, "../views/more/result.ejs"),
     { order }
   );
 

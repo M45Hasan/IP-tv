@@ -1,6 +1,6 @@
 const { tryCatch } = require("../../utils/tryCatch");
 const appStatus = require("../../utils/appStatus");
-const User = require("../../model/userModal");
+
 const {
   NotFoundError,
   BadRequestError,
@@ -34,9 +34,29 @@ const delCategory = tryCatch(async (req, res, next) => {
   if (!delCat) {
     return next(new BadRequestError("Delete failed"));
   }
+
+  if (delCat.serviceList.length > 0) {
+    await Service.deleteMany({ _id: { $in: delCat.serviceList } });
+  }
   appStatus(200, "Delete", "", res);
+});
+
+const getCategory = tryCatch(async (req, res, next) => {
+  const view = await Category.find();
+  const viewDetail = await Category.find().populate("serviceView");
+
+  return res.status(200).json({ data: view, dataDetail: viewDetail });
+});
+
+const oneCategory = tryCatch(async (req, res, next) => {
+  const id = req.params.uid;
+  const viewOne = await Category.findOne({ name: id }).populate("serviceView");
+
+  appStatus(200, "Done", viewOne, res);
 });
 module.exports = {
   newCategory,
   delCategory,
+  getCategory,
+  oneCategory,
 };

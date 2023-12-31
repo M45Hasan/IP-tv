@@ -1,6 +1,6 @@
 const { tryCatch } = require("../../utils/tryCatch");
 const appStatus = require("../../utils/appStatus");
-const User = require("../../model/userModal");
+
 const {
   NotFoundError,
   BadRequestError,
@@ -52,9 +52,26 @@ const emailVerify = tryCatch(async (req, res, next) => {
   res.redirect(`${process.env.CLIENT_URL}/paymentOption`);
 });
 
+const getAll = tryCatch(async (req, res, next) => {
+  const view = await Customer.find();
+  const viewDetail = await Customer.find()
+    .populate("orderView")
+    .populate("myService");
 
+  return res.status(200).json({ data: view, dataDetail: viewDetail });
+});
 
+const getMe = tryCatch(async (req, res, next) => {
+  const id = req.params.uid;
+
+  const myInfo = await Customer.findById(id)
+    .populate("orderView")
+    .populate("myService");
+  appStatus(200, "INfo", myInfo, res);
+});
 module.exports = {
   newCustomer,
   emailVerify,
+  getMe,
+  getAll,
 };
