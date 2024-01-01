@@ -6,6 +6,7 @@ const serviceSchema = new Schema(
     category: { type: Schema.Types.ObjectId, ref: "Category" },
     purchaseList: [{ type: Schema.Types.ObjectId, ref: "Order" }],
     serviceName: { type: String, require },
+    categoryName: { type: String, require },
     detail: { type: String },
     information: { type: String },
     live: { type: String },

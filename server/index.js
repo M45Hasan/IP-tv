@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const dbConnect = require("./config/db");
-const path = require("path"); 
+const path = require("path");
 const nodemon = require("nodemon");
 dotenv.config();
 const cors = require("cors");
@@ -28,9 +28,9 @@ dbConnect();
 let allowedOrigins = [];
 
 if (process.env.NODE_ENV === "development") {
-  allowedOrigins = [`${process.env.SERVER_URL_DEV}`];
+  allowedOrigins = [`${process.env.CLIENT_URL}`];
 } else {
-  allowedOrigins = [`${process.env.SERVER_URL}`];
+  allowedOrigins = [`${process.env.CLIENT_URL}`];
 }
 
 app.use(

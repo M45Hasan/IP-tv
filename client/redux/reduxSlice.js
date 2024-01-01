@@ -2,10 +2,12 @@ import React from "react";
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   product: [],
+  customerInfo: [],
+  adminInfo: [],
 };
 
 export const reduxSlice = createSlice({
-  name: "product",
+  name: "iptv",
   initialState,
   reducers: {
     addToCart: (state, action) => {
@@ -44,6 +46,12 @@ export const reduxSlice = createSlice({
     resetCart: (state, action) => {
       state.product = [];
     },
+    customerInfo: (state, action) => {
+      state.customerInfo = action.payload;
+    },
+    adminInfo: (state, action) => {
+      state.adminInfo = action.payload;
+    },
   },
 });
 
@@ -53,6 +61,8 @@ export const {
   decrementCart,
   deleteCart,
   resetCart,
+  customerInfo,
+  adminInfo,
 } = reduxSlice.actions;
 
 export default reduxSlice.reducer;

@@ -70,6 +70,7 @@ const newService = tryCatch(async (req, res, next) => {
       regularPrice,
     },
     category: ifThere._id,
+    categoryName: ifThere.name,
   });
 
   const saveService = await crtService.save();

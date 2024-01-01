@@ -11,7 +11,7 @@ import { Icon } from "@iconify/react";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  //   const [showNavbar, setShowNavbar] = React.useState(false);
+
   const [showNavbar1, setShowNavbar1] = React.useState(false);
   const [isOpen, setOpen] = useState(false);
   const [womensSubCategory, setWomensSubCategory] = useState([]);
@@ -20,13 +20,9 @@ const Navbar = () => {
   let navigate = useNavigate();
   const scrollDirection = useScrollDirection();
 
-  //   const handleShowNavbar = () => {
-  //     setShowNavbar(!showNavbar);
-  //   };
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
-  };
+
+  const menuLink = ["European 4kIPTV", " Asian IPTV ", "Reseller IPTV", "Restream IPTV", "bdix IPTV", "Demo"]
   const handleShowNavbar1 = () => {
     setShowNavbar1(!showNavbar1);
   };
@@ -70,9 +66,8 @@ const Navbar = () => {
           {/* Manu 2nd part*/}
           <div className="flex justify-between ">
             <div
-              className={`nav-elements z-50 uppercase ${
-                showNavbar && "active"
-              }`}
+              className={`nav-elements z-50 uppercase ${showNavbar && "active"
+                }`}
             >
               <ul className="flex  lg:items-center ">
                 <li className=" lg:text-black hover:text-primary duration-300 underline-hover relative ">
@@ -81,7 +76,7 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li className="relative group">
+                {/* <li className="relative group">
                   <button className=" flex items-center uppercase  ">
                     Shop
                     <Icon icon="mdi:arrow-down-drop" width={25} />
@@ -118,57 +113,16 @@ const Navbar = () => {
                       </Link>
                     </div>
                   </ul>
-                </li>
-
-                {/* <li className="dropdown relative">
-                  <button className="rounded inline-flex items-center">
-                    <span className="mr-1 text-black hover:text-primary duration-300 py-4">
-                      Shop
-                    </span>
-                    <svg
-                      className="fill-current h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />{" "}
-                    </svg>
-                  </button>
-                  <ul className="dropdown-menu absolute hidden text-gray-700 pt-1">
-                    <Link
-                      to={{
-                        pathname: `/${"winter"}`,
-                        search: "?category=winter",
-                      }}
-                      className="hover:text-white hover:bg-primary_hov px-8 py-2"
-                    >
-                      winter
-                    </Link>
-                    <Link
-                      to={{
-                        pathname: `/${"summer"}`,
-                        search: "?category=summer",
-                      }}
-                      className="hover:text-white hover:bg-primary_hov px-8 py-2"
-                    >
-                      {"summer"}
-                    </Link>
-                    <Link
-                      to={{
-                        pathname: `/${"eid"}`,
-                        search: "?category=eid",
-                      }}
-                      className="hover:text-white hover:bg-primary_hov px-8 py-2"
-                    >
-                      {"eid"}
-                    </Link>
-                  </ul>
                 </li> */}
+                {menuLink.map((link, i) => (
+                  <li key={i} className=" lg:text-black hover:text-primary duration-300 underline-hover relative ">
+                    <Link to={`/${link}`} className="py-8 px-6">
+                      {link}
+                    </Link>
+                  </li>
+                ))}
 
-                <li className="lg:text-black relative underline-hover hover:text-primary duration-300">
-                  <Link to={"/about"} className="py-8 px-6">
-                    About
-                  </Link>
-                </li>
+
                 <li className="lg:text-black relative underline-hover hover:text-primary duration-300">
                   <Link to={"/contactUs"} className="py-8 px-6">
                     Contact
@@ -184,7 +138,7 @@ const Navbar = () => {
             <div
               onClick={handelCart}
               className=""
-              // absolute top-[50%] translate-y-[-50%] md:right-16  right-28
+            // absolute top-[50%] translate-y-[-50%] md:right-16  right-28
             >
               <div className="relative">
                 <FaShoppingCart size={25} />
@@ -196,7 +150,7 @@ const Navbar = () => {
             <div
               className="md:block hidden text-[#1b417f] hover:text-primary_hov  cursor-pointer   rounded"
               onClick={handleShowNavbar1}
-              // absolute right-2
+            // absolute right-2
             >
               <Icon
                 icon="mingcute:menu-fill"
@@ -211,11 +165,10 @@ const Navbar = () => {
       {/* Side bar content */}
       <div className="transition ease-in-out delay-150 duration-700 z-[9999999]">
         <div
-          className={`nav-elements-burger px-12 transition ease-in-out delay-150 duration-700 z-[999] h-[100vh] bg-gray-white  ${
-            showNavbar1
-              ? "active transition ease-in-out delay-150 duration-700 "
-              : "hidden transition ease-in-out delay-150 duration-700"
-          } `}
+          className={`nav-elements-burger px-12 transition ease-in-out delay-150 duration-700 z-[999] h-[100vh] bg-gray-white  ${showNavbar1
+            ? "active transition ease-in-out delay-150 duration-700 "
+            : "hidden transition ease-in-out delay-150 duration-700"
+            } `}
         >
           <div className="outer mt-[85px]" onClick={handleShowNavbar1}>
             <div className="inner">

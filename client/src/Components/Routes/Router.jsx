@@ -59,24 +59,14 @@ const router = createBrowserRouter([
         path: "/contactUs",
         element: <ContactUs></ContactUs>,
       },
-      {
-        path: "/cart",
-        element: <Cart></Cart>,
-      },
+     
 
       {
         path: "/:subcategory",
         element: <ProductsBySubCategory />,
       },
 
-      {
-        path: "/products/singleProduct/:ProductId",
-        element: <SingleProduct></SingleProduct>,
-      },
-      {
-        path: "/login",
-        element: <Login></Login>,
-      },
+    
     ],
   },
   {
@@ -125,6 +115,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  
   {
     path: "adminUpdateProduct/:id",
     element: <AdminUpdateProduct></AdminUpdateProduct>,

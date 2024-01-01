@@ -1,171 +1,192 @@
-import React, { useState } from "react";
-import { toast } from "react-hot-toast";
-import { category } from "../../../../ApiServices/fakeData";
-const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
-const AddBanner = () => {
-  // const { profile } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [megaOffer, setMegaOffer] = useState(false);
-  const [offerDate, setOfferDate] = useState("");
-  const [image, setImage] = useState();
-  const [imageMobile, setImageMobile] = useState();
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Button,
+  Input,
+  Option,
+  Select,
+  Textarea,
+  Typography,
+} from "@material-tailwind/react";
 
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    let formDataObj = new FormData();
-    formDataObj.append(
-      "data",
-      JSON.stringify({ category: selectedCategory, megaOffer, offerDate })
-    );
-    if (image) {
-      formDataObj.append("image", image);
-    }
-    if (imageMobile) {
-      formDataObj.append("imageMobile", imageMobile);
-    }
+import { Controller, useForm } from "react-hook-form";
+import Api from "../../../pages/Api";
 
+const Banner = () => {
+  const admin = useSelector((state) => state?.orebiSlice?.price);
+  const [banData, setBan] = useState("");
+  const [banDataa, setBana] = useState([""]);
+  const {
+    register,
+    handleSubmit,
+
+    control,
+    formState: { errors },
+  } = useForm();
+  const [category] = useState([
+    "European 4kIPTV", "Asian IPTV ", "bdix IPTV"
+  ]);
+
+  // data send to dataBase
+  const onSubmit = async (data) => {
     try {
-      // console.log(formDataObj);
-      let response;
-      if (image && image.name) {
-        response = await fetch(`${apiUrl}/banner`, {
-          method: "POST",
-          body: formDataObj,
-        });
 
-        const data = await response.json();
+      // assuming your file input name is "url"
 
-        if (response.ok) {
-          // Reset form and image state or perform other actions
-          setImage({});
-          toast.success("Banner added successfully");
-        } else {
-          // Handle the case where the response status is not OK
-          console.error("Upload failed");
-          toast.error("Upload failed");
-        }
-      } else {
-        // Handle the case where no image is provided
-        console.error("Please provide a banner");
-        toast.error("Please provide a banner");
+      // Add other form data properties
+      const name = data.category
+
+
+      const res = await Api.post("/iptv/api/v1/category/new", { name });
+
+      if (res.data.message) {
+        alert(res.data.message);
+        isBanner();
       }
     } catch (error) {
-      // Handle any other errors that might occur during the request
-      console.error("An error occurred:", error);
-      toast.error("An error occurred");
-    } finally {
-      // This will always run, regardless of success or failure
-      setLoading(false);
+      alert(error.response.data.error)
     }
   };
 
-  // console.log(megaOffer);
+  //###### get Banner start ##########
+
+  const isBanner = async () => {
+    try {
+      const res = await Api.get("/iptv/api/v1/category/all");
+
+      if (res.data.data.length > 0) {
+        setBana(res.data.data);
+      }
+    } catch (error) { }
+  };
+
+  //###### get Banner end ##########
+  //###### banner delete star ##########
+
+  //  course del #######
+  const handelDel = async (uid) => {
+    try {
+      const confrim = window.confirm("Are you sure?");
+      if (!confrim) {
+        return;
+      }
+
+      await Api.get(`/iptv/api/v1/category/delete/${uid}`);
+      alert("Category Deleted");
+      isBanner();
+    } catch (err) {
+      console.error("Error reason:", err);
+    }
+  };
+  //###### banner delete end ##########
+  //############### useEff######
+  useEffect(() => {
+    isBanner();
+  }, []);
+  //############### useEff######
+  console.log(admin);
+  //############### useEff######
 
   return (
-    <div className="md:p-20 p-3 w-[60%] md:w-[80%] pb-20 mx-auto">
-      <h3 className="mb-10 font-bold text-3xl tracking-wide text-center uppercase">
-        Banners Upload
-      </h3>
+    <div className="m-7 lg:w-full w-[60%] ">
 
-      <div className="p-10 max-w-3xl mx-auto">
-        <h3 className="text-xl bg-primary py-3 px-10 font-extrabold">
-          Banner Upload
-        </h3>
-        <div className="shadow px-10 py-5">
-          <div className="form-control mb-3 lg:flex justify-between items-center">
-            <span className="">Upload Images for Dekhstop</span>
-            <input
-              autoComplete="off"
-              required
-              type="file"
-              name="images"
-              accept="image/*"
-              multiple
-              onChange={(e) => setImage(e.target.files[0])}
-              className="border bg-secondary text-primary_hov  px-5 py-2  w-full max-w-xs"
-            />
+
+      <form onSubmit={handleSubmit(onSubmit)} className="pb-10">
+
+        <div className="border rounded-md mt-10 ">
+          <div className="bg-primary text-white py-2 mb-10">
+            <h3 className="font-bold text-xl text-center tracking-wide pl-5">
+              Add Category
+            </h3>
           </div>
-          <div className="form-control mb-3 lg:flex justify-between items-center">
-            <span className="">Upload Images for Mobile</span>
-            <input
-              autoComplete="off"
-              required
-              type="file"
-              name="imagesMobile"
-              accept="image/*"
-              multiple
-              onChange={(e) => setImageMobile(e.target.files[0])}
-              className="border bg-secondary text-primary_hov  px-5 py-2  w-full max-w-xs"
-            />
-          </div>
-        </div>
-      </div>
 
-      <div className="p-10 max-w-3xl mx-auto">
-        <h3 className="text-xl bg-primary py-3 px-10 font-extrabold">
-          Categories
-        </h3>
-        <div className="shadow px-10 py-5">
-          <div className="form-control mb-3 lg:flex justify-between items-center">
-            <span className="">Select Category</span>
-            <select
-              autoComplete="off"
-              required
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="border bg-secondary text-primary_hov  px-5 py-2  w-full max-w-xs"
-              type="text"
-              name="category"
-            >
-              <option> Select Category</option>
-              {category?.map((item, idx) => (
-                <option key={idx} value={item.category}>
-                  {item.category}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </div>
+          <div className=" mb-7 px-5">
+            <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-20">
+              <div>
+                <label className="mb-2 md:text-lg  text-black">
+                  {" "}
+                  Position
+                </label>
+              </div>
 
-      <div className="p-10 max-w-3xl mx-auto">
-        <h3 className="text-xl bg-primary py-3 px-10 font-extrabold">
-          Mega Offer
-        </h3>
+              <div className="text-black">
+                <Controller
+                  name="category"
+                  className="text-primary"
+                  control={control}
 
-        <div className="shadow px-10 py-5">
-          <div className="form-control mb-3 lg:flex justify-between items-center">
-            <span className="">Set offer</span>
-            <div className="flex gap-5 items-center">
-              <input
-                type="checkbox"
-                id="mega"
-                name="megaOffer"
-                onChange={(e) => {
-                  setMegaOffer(e.target.checked);
-                }}
-                className="w-6 h-6 accent-primary_hov"
-              />
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      //   variant="outlined"
+                      color="blue"
+                      className="text-primary"
 
-              <span htmlFor="default-checkbox" className="inline-block">
-                Mega Offer
-              </span>
+                    >
+
+                      {category.map((cat, i) => (
+                        <Option className="text-primary" key={i} value={cat}>
+                          {cat}
+                        </Option>
+                      ))}
+                    </Select>
+                  )}
+                />
+                {errors.category && (
+                  <p>Category is required and must be valid</p>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="flex justify-center">
-        <button
-          onClick={handleUpload}
-          className="my-3 px-2 py-2 text-xl text-white rounded-md bg-primary_hov hover:bg-primary"
-        >
-          Upload
-        </button>
+
+
+        <div className="text-center pt-10">
+          <Button type="submit" className="bg-blue-600 px-10 py-3">
+            Add Blog
+          </Button>
+        </div>
+      </form>
+
+
+      <div className=" flex flex-wrap gap-4 ">
+        {banDataa &&
+          banDataa?.map((kur, i) => (
+            <div
+              key={i}
+              className="max-w-sm w-[300px] relative bg-white border border-gray-200 rounded-lg shadow"
+            >
+
+
+              <div className="p-5">
+
+
+                <p>{kur?.name}</p>
+
+                <div className="flex justify-between mt-5">
+                  <link to="/adminAddProducts" >
+                    <p className="inline-flex cursor-pointer items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Service</p>
+                  </link>
+                  <p
+                    onClick={() => handelDel(kur._id)}
+                    className="inline-flex cursor-pointer items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Delete
+                  </p>
+
+
+                </div>
+
+
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );
 };
 
-export default AddBanner;
+export default Banner;

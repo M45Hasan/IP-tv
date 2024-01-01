@@ -27,10 +27,7 @@ const Header = () => {
 
   const [showNavbar, setShowNavbar] = useState(false);
 
-  const handleShowNavbar = () => {
-    setShowNavbar(!showNavbar);
-  };
-
+  const menuLink = ["European 4kIPTV", " Asian IPTV ", "Reseller IPTV", "Restream IPTV", "bdix IPTV", "Demo"]
   useEffect(() => {
     // console.log("asdfasdf", getCategories(setWomensSubCategory, "winter"));
     getCategories(setMensSubCategory, "summer");
@@ -64,12 +61,12 @@ const Header = () => {
                   style={{ "--i": ".6s" }}
                   onClick={() => setOpen(!isOpen)}
                 >
-                  {/* <a href="#">Home</a> */}
+
                   <Link to={"/"} className="py-8 px-6">
                     Home
                   </Link>
                 </li>
-                <li className="nav-link" style={{ "--i": ".85s" }}>
+                {/* <li className="nav-link" style={{ "--i": ".85s" }}>
                   <a href="#">
                     Shop
                     <Icon
@@ -126,8 +123,21 @@ const Header = () => {
                       <div className="arrow"></div>
                     </ul>
                   </div>
-                </li>
+                </li> */}
+                {menuLink.map((link, i) => (
+                  <li
+                    key={i}
+                    className="nav-link"
+                    style={{ "--i": ".6s" }}
+                    onClick={() => setOpen(!isOpen)}
+                  >
 
+                    <Link to={`/${link}`} className="py-2 px-6">
+                      {link}
+                    </Link>
+                  </li>
+
+                ))}
                 <li
                   className="nav-link"
                   style={{ "--i": "1.35s" }}
@@ -153,7 +163,7 @@ const Header = () => {
               <div
                 onClick={handelCart}
                 className=""
-                // absolute top-[50%] translate-y-[-50%] md:right-16  right-28
+              // absolute top-[50%] translate-y-[-50%] md:right-16  right-28
               >
                 <div className="relative">
                   <FaShoppingCart size={25} />
@@ -165,7 +175,7 @@ const Header = () => {
               <div
                 className="md:block hidden text-[#1b417f] hover:text-primary_hov  cursor-pointer   rounded"
                 onClick={handleShowNavbar1}
-                // absolute right-2
+              // absolute right-2
               >
                 <Icon
                   icon="mingcute:menu-fill"
@@ -179,7 +189,7 @@ const Header = () => {
           <div
             onClick={handelCart}
             className="absolute top-[50%] translate-y-[-50%] md:right-16  right-28 block md:hidden"
-            // absolute top-[50%] translate-y-[-50%] md:right-16  right-28
+          // absolute top-[50%] translate-y-[-50%] md:right-16  right-28
           >
             <div className="relative">
               <FaShoppingCart size={25} />
@@ -199,11 +209,10 @@ const Header = () => {
         {/* Side bar content */}
         <div className="transition ease-in-out delay-150 duration-700 z-[9999999]">
           <div
-            className={`nav-elements-burger px-12 transition ease-in-out delay-150 duration-700 z-[999] h-[100vh] bg-gray-white  ${
-              showNavbar1
-                ? "active transition ease-in-out delay-150 duration-700 "
-                : "hidden transition ease-in-out delay-150 duration-700"
-            } `}
+            className={`nav-elements-burger px-12 transition ease-in-out delay-150 duration-700 z-[999] h-[100vh] bg-gray-white  ${showNavbar1
+              ? "active transition ease-in-out delay-150 duration-700 "
+              : "hidden transition ease-in-out delay-150 duration-700"
+              } `}
           >
             <div className="outer mt-[85px]" onClick={handleShowNavbar1}>
               <div className="inner">

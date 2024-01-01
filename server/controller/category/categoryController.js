@@ -11,7 +11,7 @@ const Category = require("../../model/categoryModel");
 
 const newCategory = tryCatch(async (req, res, next) => {
   const nam = req.body.name;
-
+  console.log(nam);
   const cat = await Category.findOne({ name: nam });
   if (cat) {
     return next(new BadRequestError("Already there"));
@@ -28,7 +28,7 @@ const newCategory = tryCatch(async (req, res, next) => {
 });
 
 const delCategory = tryCatch(async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.uid;
   console.log(id);
   const delCat = await Category.findByIdAndDelete({ _id: id });
   if (!delCat) {

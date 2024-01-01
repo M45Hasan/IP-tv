@@ -152,12 +152,10 @@ const orderCancel = tryCatch(async (req, res, next) => {
 });
 
 const allOrder = tryCatch(async (req, res, next) => {
-  const successOrder = await Order.find({ isSuccess: true });
-  const cancelOrder = await Order.find({ isSuccess: false });
+  const successOrder = await Order.find();
 
   return res.status(200).json({
-    success: successOrder.length > 0 ? successOrder : 0,
-    cancel: cancelOrder.length > 0 ? cancelOrder : 0,
+    data: successOrder,
   });
 });
 
